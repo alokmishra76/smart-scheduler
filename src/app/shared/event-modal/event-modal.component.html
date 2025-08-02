@@ -1,0 +1,24 @@
+<div class="modal" *ngIf="visible">
+  <div class="modal-content">
+    <h3>Add Event</h3>
+
+    <form [formGroup]="eventForm" (ngSubmit)="onSave()">
+      <label>Title:</label>
+      <input type="text" formControlName="title" />
+      <div *ngIf="eventForm.get('title')?.invalid && eventForm.get('title')?.touched" class="error">
+        Title is required.
+      </div>
+
+      <label>Duration (hours):</label>
+      <input type="number" formControlName="duration" min="1" max="12" />
+      <div *ngIf="eventForm.get('duration')?.invalid && eventForm.get('duration')?.touched" class="error">
+        Duration must be between 1 and 12.
+      </div>
+
+      <div class="actions">
+        <button type="submit" [disabled]="eventForm.invalid">Save</button>
+        <button type="button" (click)="close.emit()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

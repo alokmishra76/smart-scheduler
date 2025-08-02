@@ -7,12 +7,33 @@
   <div class="calendar-body">
     <div class="time-column">
       <div class="time-slot" *ngFor="let hour of hours">{{ hour }}</div>
-</div>
+    </div>
 
     <div class="day-columns">
-      <div class="day-column" *ngFor="let day of days">
-        <div class="time-slot" *ngFor="let hour of hours"></div>
+      <div class="day-column" *ngFor="let day of days; let i = index">
+        <div
+          class="time-slot"
+          *ngFor="let hour of hours; let h = index"
+          (click)="onSlotClick(i, h)"
+        ></div>
+
+        <div
+          class="event-block"
+          *ngFor="let event of getEventsForDay(i)"
+          [style.top]="getEventTopOffset(event)"
+          [style.height]="getEventHeight(event)"
+          [style.background]="event.color || '#2196f3'"
+        >
+          {{ event.title }}
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+<app-event-modal
+  [visible]="showModal"
+  [defaultStartTime]="selectedSlotTime"
+  (save)="handleSaveEvent($event)"
+  (close)="showModal = false"
+/>
