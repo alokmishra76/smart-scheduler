@@ -10,7 +10,13 @@
     </div>
 
     <div class="day-columns">
-      <div class="day-column" *ngFor="let day of days; let i = index">
+      <div
+        class="day-column"
+        *ngFor="let day of days; let i = index"
+        cdkDropList
+        [cdkDropListData]="i"
+        (cdkDropListDropped)="onEventDropped($event, i)"
+      >
         <div
           class="time-slot"
           *ngFor="let hour of hours; let h = index"
@@ -20,6 +26,9 @@
         <div
           class="event-block"
           *ngFor="let event of getEventsForDay(i)"
+          cdkDrag
+          [cdkDragData]="{ event, dayIndex: i }"
+          (cdkDragEnded)="onEventDragEnd($event)"
           [style.top]="getEventTopOffset(event)"
           [style.height]="getEventHeight(event)"
           [style.background]="event.color || '#2196f3'"

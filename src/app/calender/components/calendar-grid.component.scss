@@ -50,6 +50,7 @@
   .day-column {
     border-left: 1px solid #eee;
     position: relative;
+     height: calc(60px * 24);
 
     .time-slot {
       height: 60px;
