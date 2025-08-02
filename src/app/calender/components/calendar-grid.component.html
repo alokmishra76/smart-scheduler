@@ -1,0 +1,18 @@
+<div class="calendar-wrapper">
+  <div class="calendar-header">
+    <div class="time-label empty"></div>
+    <div class="day-label" *ngFor="let day of days">{{ day }}</div>
+  </div>
+
+  <div class="calendar-body">
+    <div class="time-column">
+      <div class="time-slot" *ngFor="let hour of hours">{{ hour }}</div>
+</div>
+
+    <div class="day-columns">
+      <div class="day-column" *ngFor="let day of days">
+        <div class="time-slot" *ngFor="let hour of hours"></div>
+      </div>
+    </div>
+  </div>
+</div>
